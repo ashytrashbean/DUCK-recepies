@@ -1,4 +1,4 @@
-import { createContext, useEffect, useState } from "react";
+import { createContext, useEffect, useRef, useState } from "react";
 
 export const RecipeContext = createContext();
 
@@ -6,29 +6,43 @@ export function RecipeProvider({children}){
 
     const [recipes, setRecepies] = useState([])
     
-    useEffect(() => {
-        async function getRecipes() {
-            const uniqueRecipes = new Map();
+    const recipeIds = useRef(new Set());
+    const isLoading = useRef(false);
+
+        async function getRecipes( amount = 12) {
+            if(isLoading.current) return;
+
+            isLoading.current = true;
+            const newRecipes = [];
+
             try{
-                while(uniqueRecipes.size < 12){
+                while(newRecipes.length < amount){
                     let response = await fetch('https://themealdb.com/api/json/v1/1/random.php')
                     const data = await response.json();
                     const recipe = data.meals[0]
 
-                    uniqueRecipes.set(recipe.idMeal, recipe)
+                    if(!recipeIds.current.has(recipe.idMeal)){
+                        recipeIds.current.add(recipe.idMeal);
+                        newRecipes.push(recipe)
+                    }
                 }
-                setRecepies([...uniqueRecipes.values()])
+                setRecepies((currentRecipes)=>[...currentRecipes,...newRecipes,])
             }
             catch(error){
-                console.log(error.response)
+                console.error(error);
+            } finally{
+                isLoading.current = false
             }
         } 
-        getRecipes()
+
+    useEffect(()=>{
+        getRecipes(12);
     },[])
 
 
+
     return(
-        <RecipeContext.Provider value={{recipes}}>
+        <RecipeContext.Provider value={{recipes, getRecipes}}>
             {children}
         </RecipeContext.Provider>
     )

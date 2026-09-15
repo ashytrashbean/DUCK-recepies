@@ -5,14 +5,17 @@ export default function Layout(){
     return(
         <>
             <header>
-                <h2>D.U.C.K</h2>
-            
+                <div className="icon">
+                    <img src="src\assets\g19.png" alt="" height={100}/>
+                <h1>D.U.C.K</h1>
+                </div>
+                
                 <nav>
                     <ul>
-                        <li>Home</li>
+                        <li><Link to={"/"}>Home</Link></li>
                         <li>Search</li>
-                        <li>Login</li>
                         <li>Saved</li>
+                        <li>Login</li>
                     </ul>
                 </nav>
 
@@ -23,10 +26,17 @@ export default function Layout(){
             </main>
 
             <footer>
-                <span>D eliciously</span><br />
-                <span>U seful</span><br />
-                <span>C ooking</span><br />
-                <span>K nowledge</span>
+                <div>
+                    <img src="src\assets\g19.png" alt="" height={100}/>
+                </div>
+                
+                <div>
+                    <span>Deliciously</span><br />
+                    <span>Useful</span><br />
+                    <span>Cooking</span><br />
+                    <span>Knowledge</span>
+                </div>
+        
             </footer>
         </>
 

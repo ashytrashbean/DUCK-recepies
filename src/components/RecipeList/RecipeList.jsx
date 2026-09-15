@@ -1,14 +1,14 @@
 import { useContext } from "react"
-import { RecipeContext } from "../context/RecipeContext"
+import { RecipeContext } from "../../context/RecipeContext"
 
 
 export default function RecipeList(){
 
-    const {recipes} = useContext(RecipeContext)
+    const {recipes, getRecipes} = useContext(RecipeContext)
 
     return(
         <div className="recepies">
-        {recipes.map((recipe)=>(
+            {recipes.map((recipe)=>(
             <section key={recipe.idMeal}>
                 <img src={recipe.strMealThumb} alt="" height={200}/>
                 <h3>{recipe.strMeal}</h3>
@@ -19,5 +19,8 @@ export default function RecipeList(){
                 <br />
             </section>
         ))}
-        </div>)
-}
+
+        <button onClick={()=> getRecipes(5)}>Load More</button>
+
+        </div>
+)}
