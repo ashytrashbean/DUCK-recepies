@@ -1,0 +1,42 @@
+
+
+.recepies{
+    display: flex;
+    width: 100%;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+
+section{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    width: 300px;
+    border: 1px solid gray;
+    border-radius: 5px;
+    margin: 5px;
+}
+
+section h3{
+    text-align: center;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    width: 250px;
+}
+
+section img{
+    width: 100%;
+    object-fit: cover;
+}
+
+section span{
+    border: 1px solid green;
+    background-color: green;
+    color: white;
+    border-radius: 15px;
+    margin: 10px;
+    padding: 5px;
+}

@@ -17,16 +17,16 @@ export default function Layout(){
                 </nav>
 
             </header>
-            
+
             <main>
                 <Outlet/>
             </main>
 
             <footer>
-                <span>Deliciously</span><br />
-                <span>Useful</span><br />
-                <span>Cooking</span><br />
-                <span>Knowledge</span>
+                <span>D eliciously</span><br />
+                <span>U seful</span><br />
+                <span>C ooking</span><br />
+                <span>K nowledge</span>
             </footer>
         </>
 
