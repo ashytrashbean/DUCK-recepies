@@ -1,26 +1,33 @@
 import { useContext } from "react"
 import { RecipeContext } from "../../context/RecipeContext"
+import styles from './recipeList.module.css'
+import { Link } from "react-router-dom"
 
 
 export default function RecipeList(){
 
-    const {recipes, getRecipes} = useContext(RecipeContext)
+    const {recipes, loadRecipes} = useContext(RecipeContext)
 
     return(
-        <div className="recepies">
-            {recipes.map((recipe)=>(
-            <section key={recipe.idMeal}>
-                <img src={recipe.strMealThumb} alt="" height={200}/>
-                <h3>{recipe.strMeal}</h3>
-                <div>
-                    <span>{recipe.strCategory}</span>
-                    <span>{recipe.strCountry}</span>
-                </div>
-                <br />
-            </section>
-        ))}
+        <div className={styles.center}>
 
-        <button onClick={()=> getRecipes(5)}>Load More</button>
+        <div className={styles.recepies}>
+            {recipes.map((recipe)=>(
+            <Link key={recipe.idMeal} to={`/recipe/${recipe.idMeal}`} className={styles.recipeLink}>
+                <section >
+                    <img src={recipe.strMealThumb} alt="" />
+                    <h3>{recipe.strMeal}</h3>
+                    <div>
+                        <span>{recipe.strCategory}</span>
+                        <span>{recipe.strCountry}</span>
+                    </div>
+                    <br />
+                </section>
+            </Link>
+        ))}
+        </div>
+
+        <button onClick={()=> loadRecipes(5)}>Load More</button>
 
         </div>
 )}
