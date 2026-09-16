@@ -5,10 +5,10 @@ export default function Layout(){
     return(
         <>
             <header>
-                <div className="icon">
-                    <img src="src\assets\g19.png" alt="" height={100}/>
-                <h1>D.U.C.K</h1>
-                </div>
+                <Link to={"/"} className="icon">
+                        <img src="src\assets\g19.png" alt="" height={100}/>
+                        <h1>D.U.C.K</h1>
+                </Link>
                 
                 <nav>
                     <ul>

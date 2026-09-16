@@ -14,7 +14,7 @@ export default function RecipeList(){
         <div className={styles.recepies}>
             {recipes.map((recipe)=>(
             <Link key={recipe.idMeal} to={`/recipe/${recipe.idMeal}`} className={styles.recipeLink}>
-                <section >
+                <section className= {styles.sect}>
                     <img src={recipe.strMealThumb} alt="" />
                     <h3>{recipe.strMeal}</h3>
                     <div>

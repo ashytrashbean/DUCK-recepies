@@ -3,7 +3,7 @@ import './App.css'
 import Layout from './layouts/Layout'
 import { Route, Routes } from 'react-router-dom'
 import HomePage from './pages/HomePage'
-import Recipe from "./components/Recipe"
+import Recipe from "./components/Recipe/Recipe"
 
 function App() {
   return (

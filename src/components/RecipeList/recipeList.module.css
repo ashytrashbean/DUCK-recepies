@@ -13,7 +13,7 @@
 }
 
 
-section{
+.sect{
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -27,13 +27,13 @@ section{
     background-color: white;
 }
 
-section:hover{
+.sect:hover{
     border: 1px solid black;
 
 }
 
 
-section h3{
+.sect h3{
     text-align: center;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -41,19 +41,19 @@ section h3{
     width: 250px;
 }
 
-section img{
+.sect img{
     height: 200px;
     width: 100%;
     object-fit: cover;
     filter: blur(0.5px);
     overflow: hidden;
 }
-section:hover img{
+.sect:hover img{
     filter: blur(0px);
     /* transform: scale(1.01); */
 }
 
-section span{
+.sect span{
     border: 1px solid green;
     background-color: green;
     color: white;
