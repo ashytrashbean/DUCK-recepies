@@ -27,6 +27,8 @@ export default function Recipe(){
                 </div>
             </div>
 
+            <br /><br /> <hr />
+
             <div className={styles.howto}>
                 <ul>
                     {Array.from({ length: 20 }, (_, index)=>{
@@ -47,7 +49,7 @@ export default function Recipe(){
                     <p className={styles.instructions}>{recipe.strInstructions}</p>
                 </div>
             </div>
-        
+        <br /><br />
         
         
         </section>

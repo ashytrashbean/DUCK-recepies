@@ -4,6 +4,8 @@ import Layout from './layouts/Layout'
 import { Route, Routes } from 'react-router-dom'
 import HomePage from './pages/HomePage'
 import Recipe from "./components/Recipe/Recipe"
+import LoginPage from './pages/LoginPage'
+import SavedPage from './pages/SavedPage'
 
 function App() {
   return (
@@ -12,6 +14,8 @@ function App() {
         <Route path='/' element={<Layout/>}>
           <Route path='/' element={<HomePage/>}/>
           <Route path='/recipe/:id' element={<Recipe/>}/>
+          <Route path='/login' element={<LoginPage/>}/>
+          <Route path='/saved' element={<SavedPage/>}/>
         </Route>
       </Routes>
     </>
