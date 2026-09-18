@@ -68,7 +68,6 @@ export default function FilterList(){
             <option value={""} >Ingredient</option>
             {ingredient.map((ing)=> <option key={ing.idIngredient} value={ing.strIngredient}>{ing.strIngredient}</option>)}
         </select>
-        {/* <button onClick={handleFilter}>Filter</button> */}
         </>
     )
 }
