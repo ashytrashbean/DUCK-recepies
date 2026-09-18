@@ -74,8 +74,117 @@ export function RecipeProvider({children}){
         filtering()
     },[])
 
+    async function filterRecipes({category, area, ingredient}) {
+        let endpoint;
+        if(category){
+            endpoint = `filter.php?c=${category}`
+        } else if(area){
+            endpoint = `filter.php?a=${area}`
+        } else if(ingredient){
+            endpoint = `filter.php?i=${ingredient}`
+        }else{return;}
+
+        try{
+            const data = await getUrl(endpoint);
+            setRecepies(data.meals ?? []);
+        } catch (error){
+            console.error("Could not filter cuz: ", error)
+        }
+        
+    }
+
+    const [users, setUsers] = useState(()=>{
+        const storedUsers = JSON.parse(localStorage.getItem('duckUsers') ?? "[]")
+        return storedUsers
+    });
+
+    const [currentUser, setCurrentUser] = useState(()=>{
+        const storedUser = localStorage.getItem('currentDuckUser')
+        return storedUser ? JSON.parse(storedUser) : null
+    })
+
+    function createUser(displayName, email, password){
+        const storedUsers = JSON.parse(localStorage.getItem('duckUsers') ?? '[]');
+
+        const alreadyExists = storedUsers.some(user => user.email.toLowerCase() === email.toLowerCase())
+
+        if (alreadyExists) {
+            return {ok: false, message:'User already exists'}
+        }
+        
+        const newUser = {
+            id: Date.now(),
+            displayName,
+            email,
+            password,
+            savedRecipes: []
+        }
+        
+        const updatedUsers = [...storedUsers, newUser]
+        
+        setUsers(updatedUsers)
+        localStorage.setItem('duckUsers', JSON.stringify(updatedUsers))
+        
+        setCurrentUser(newUser)
+        localStorage.setItem('currentDuckUser', JSON.stringify(newUser))
+        
+        return {ok: true, message:'Account sucessfully created'}
+    }
+    
+    function logInUser(email, password){
+        const storedUsers = JSON.parse(localStorage.getItem('duckUsers') ?? '[]')
+        
+        const foundUser = storedUsers.find(
+            user =>
+                user.email.toLowerCase() === email.toLowerCase() &&
+            user.password === password
+        )
+        
+        if(!foundUser){
+            return {ok: false, message:'Wrong email or password'}
+        }
+        
+        setCurrentUser(foundUser)
+        localStorage.setItem('currentDuckUser', JSON.stringify(foundUser))
+        return {ok: true, message:'Logged in'}
+    }
+
+    function logOutUser(){
+        setCurrentUser(null)
+        localStorage.removeItem('currentDuckUser')
+    }
+
+    function toggleSaved(recipeId){
+        if(!currentUser) return{ok: false, message:'you have to log in to be abale to save'}
+
+        const storedUsers = JSON.parse(localStorage.getItem('duckUsers') ?? '[]')
+
+        const updatedUsers = storedUsers.map(user => {
+            if(user.id !== currentUser.id) return user
+
+            const alreadySaved = (user.savedRecipes ?? []).includes(recipeId)
+
+            return{
+                ...user,
+                savedRecipes: alreadySaved
+                ? (user.savedRecipes ?? []).filter(id => id !== recipeId)
+                : [...(user.savedRecipes ?? []), recipeId]
+            }
+        })
+
+        setUsers(updatedUsers)
+        localStorage.setItem('duckUsers', JSON.stringify(updatedUsers))
+        
+        const updatedCurrentUser = updatedUsers.find(user => user.id === currentUser.id)
+        
+        setCurrentUser(updatedCurrentUser)
+        localStorage.setItem('currentDuckUser', JSON.stringify(updatedCurrentUser))
+
+        return{ok: true}
+    }
+
     return(
-        <RecipeContext.Provider value={{recipes, loadRecipes, recipe, getRecipe, category, area, ingredient}}>
+        <RecipeContext.Provider value={{recipes, loadRecipes, recipe, getRecipe, category, area, ingredient, filterRecipes, users, currentUser, createUser,logInUser,logOutUser,toggleSaved}}>
             {children}
         </RecipeContext.Provider>
     )
