@@ -1,6 +1,7 @@
 import { useContext } from "react";
 import { Outlet, Link } from "react-router-dom";
 import { RecipeContext } from "../context/RecipeContext";
+import logo from "../assets/g19.png"
 
 
 export default function Layout(){
@@ -9,7 +10,7 @@ export default function Layout(){
         <>
             <header>
                 <Link to={"/"} className="icon">
-                        <img src="src\assets\g19.png" alt="" height={100}/>
+                        <img src={logo} alt="D.U.C.K logo" height={100}/>
                         <h1>D.U.C.K</h1>
                 </Link>
                 
@@ -31,7 +32,7 @@ export default function Layout(){
 
             <footer>
                 <div>
-                    <img src="src\assets\g19.png" alt="" height={100}/>
+                    <img src={logo} alt="D.U.C.K logo" height={100}/>
                 </div>
                 
                 <div>
