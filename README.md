@@ -1,19 +1,18 @@
-# React + Vite
+# D.U.C.K Recipes
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+D.U.C.K Recipes is a React-based recipe discovery app powered by TheMealDB API. Users can browse a feed of recipes, filter recipes by category, country, or ingredient, and open a detailed recipe view with ingredients, measurements, instructions, and source information.
 
-Currently, two official plugins are available:
+Users can also create a local mock account, log in, and save their favorite recipes. Saved recipes are connected to the logged-in user and persisted in the browser with `localStorage`, allowing users to return to their saved recipes during later visits.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+The project focuses on reusable React components, Context API state management, React Router navigation, controlled forms, API communication, and clear loading, error, empty, and not-found states.
 
-## React Compiler
 
-The React Compiler is enabled on this template. See [this documentation](https://react.dev/learn/react-compiler) for more information.
+# Set-Up
+    - if you would like to test out the website yourself, to the top right of this page you will the the link to it
 
-Note: This will impact Vite dev & build performances.
-You can also try [the experimental native React Compiler support in plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md#rust-react-compiler) by using `compiler: true` in the plugin options instead of using the Babel plugin.
-
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+    - now if you'd like to clone the project to run it, you will have to:
+        -clone the project
+        -open the cloned project to VS or whater coding application you use
+        - open the terminal and run: 'npm install'
+        - after thats done you only need to run: 'npm run dev'
+        - if all goes right you should get a link in your terminal
