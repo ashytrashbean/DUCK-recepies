@@ -3,21 +3,37 @@ import { RecipeContext } from "../context/RecipeContext"
 import { Link } from "react-router-dom"
 import styles from "/src/components/RecipeList/recipeList.module.css"
 
+import LoadingState from "../components/states/LoadingState"
+import ErrorState from "../components/states/ErrorState"
+import EmptyState from "../components/states/EmptyState"
 
 export default function SavedPage(){
 
     const {currentUser, fetchRecipe} = useContext(RecipeContext)
     const [savedRecipes, setSavedRecipes] = useState([])
 
+    const [savedLoading, setSavedLoading] = useState(false)
+    const [savedError, setSavedError] = useState(null)
+
     useEffect(()=>{
         if(!currentUser){
-            setSavedRecipes([])
             return
         }
 
         async function loadSavedRecipes() {
-            const recipes = await Promise.all(currentUser.savedRecipes.map((id)=>fetchRecipe(id)))
-            setSavedRecipes(recipes.filter(Boolean))
+            setSavedLoading(true)
+            setSavedError(null)
+
+            try {
+                const recipes = await Promise.all(
+                    currentUser.savedRecipes.map((id) => fetchRecipe(id))
+                )
+                setSavedRecipes(recipes.filter(Boolean))
+            } catch {
+                setSavedError("Could not load your saved recipes right now.")
+            } finally {
+                setSavedLoading(false)
+            }
         }
         loadSavedRecipes()
     },[currentUser])
@@ -26,8 +42,16 @@ export default function SavedPage(){
         return <h1>Login to save your favorite recipes</h1>
     }
     
-    if(currentUser.savedRecipes.length === 0){
-        return <h1>You currently dont have any saved recipes</h1>
+    if (savedLoading) {
+    return <LoadingState message="Loading your saved recipes..." />
+}
+
+    if (savedError) {
+        return <ErrorState message={savedError} />
+    }
+
+    if (savedRecipes.length === 0) {
+        return <EmptyState message="You have not saved any recipes yet." />
     }
         
 
