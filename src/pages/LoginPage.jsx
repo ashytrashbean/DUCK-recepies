@@ -45,25 +45,25 @@ export default function LoginPage(){
     }
 
     return(
-        <>
+        <div className="logpage">
         <h1>save recipes and create your own</h1>
-        <div>
+        <div className="log">
             <form onSubmit={handleLogin}>
                 <h2>Login </h2>
-                <label>Email: <input name="login email" type="email" value={loginEmail} onChange={(e)=>setLogEmail(e.target.value)} placeholder="your email" required/> </label> <br />
-                <label>Password: <input name="login password" type="password" value={loginpassword} onChange={(e)=>setLogPassword(e.target.value)}  placeholder="your password" required/></label> <br />
+                <label>Email: <br /> <input name="login email" type="email" value={loginEmail} onChange={(e)=>setLogEmail(e.target.value)} placeholder="your email" required/> </label> <br />
+                <label>Password: <br /> <input name="login password" type="password" value={loginpassword} onChange={(e)=>setLogPassword(e.target.value)}  placeholder="your password" required/></label> <br />
                 <button type="submit" >Login</button>
             </form>
 
             <form onSubmit={handleCreateUser}>
                 <h2>Or create an account</h2>
-                <label>Name: <input type="text" name="register name" value={name} onChange={(e)=>setName(e.target.value)} placeholder="your name you want to have displayed" required/> </label> <br />
-                <label>Email: <input type="email" name="register email" value={email} onChange={(e)=>setEmail(e.target.value)} placeholder="your email" required/> </label> <br />
-                <label>Password: <input type="password" name="register password" value={password} onChange={(e)=>setPassword(e.target.value)} placeholder="your password" required/></label> <br />
+                <label>Name: <br /><input type="text" name="register name" value={name} onChange={(e)=>setName(e.target.value)} placeholder="your name you want to have displayed" required/> </label> <br />
+                <label>Email: <br /><input type="email" name="register email" value={email} onChange={(e)=>setEmail(e.target.value)} placeholder="your email" required/> </label> <br />
+                <label>Password: <br /><input type="password" name="register password" value={password} onChange={(e)=>setPassword(e.target.value)} placeholder="your password" required/></label> <br />
                 <button type="submit" >Create account</button>
             </form>
         </div>
         
-        </>
+        </div>
     )
 }
