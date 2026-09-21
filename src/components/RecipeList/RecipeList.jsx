@@ -16,7 +16,7 @@ export default function RecipeList(){
             <Link key={recipe.idMeal} to={`/recipe/${recipe.idMeal}`} className={styles.recipeLink}>
                 <section className= {styles.sect}>
                     <img src={recipe.strMealThumb} alt="" />
-                    <h3>{recipe.strMeal}</h3>
+                    <h3>{recipe.strMeal}</h3> 
                     <div>
                         {/* <span>{recipe.strCategory}</span> */}
                         <span>{recipe.strCountry}</span>

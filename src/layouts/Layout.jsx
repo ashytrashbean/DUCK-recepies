@@ -1,7 +1,10 @@
+import { useContext } from "react";
 import { Outlet, Link } from "react-router-dom";
+import { RecipeContext } from "../context/RecipeContext";
 
 
 export default function Layout(){
+    const {currentUser, logOutUser} = useContext(RecipeContext)
     return(
         <>
             <header>
@@ -13,8 +16,10 @@ export default function Layout(){
                 <nav>
                     <ul>
                         <li><Link to={"/"}>Home</Link></li>
-                        {/* <li><Link to={"/saved"}>Saved</Link></li> */}
-                        <li><Link to={"/login"}>Login</Link></li>
+                        <li>{currentUser ? <Link to={"/saved"}>Saved</Link> : ""}</li>
+                        <li>{currentUser ? (
+                            <a onClick={logOutUser}>Log Out</a>
+                            ) : (<Link to={"/login"}>Login</Link>)}</li>
                     </ul>
                 </nav>
 

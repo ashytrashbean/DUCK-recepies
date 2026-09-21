@@ -46,3 +46,7 @@ footer, .icon{
     background-color: green;
 }
 
+a{
+    cursor: pointer;
+}
+

@@ -5,13 +5,24 @@ import styles from "./Recipe.module.css"
 
 export default function Recipe(){
     const {id} = useParams();
-    const {recipe, getRecipe} = useContext(RecipeContext)
+    const {recipe, getRecipe, toggleSaved, currentUser} = useContext(RecipeContext)
 
+    
     useEffect(()=>{
         getRecipe(id)
     },[id])
-
+    
     if(!recipe) return <p>Loading...</p>
+
+    function handleSave() {
+        const result = toggleSaved(recipe.idMeal)
+
+        if(!result.ok){
+            alert(result.message)
+        }
+    }
+
+    const isSaved = currentUser?.savedRecipes?.includes(recipe.idMeal)
 
     return(
         <section className={styles.recpt}>
@@ -24,6 +35,7 @@ export default function Recipe(){
                     <span>Country: {recipe.strCountry}</span>
                     <p>Source: <a className={styles.url} target="_blank" href={recipe.strSource}>{recipe.strSource}</a></p>
                     <p>{recipe.dateModified}</p>
+                    <button onClick={handleSave}>{isSaved ? <i className="fa-solid fa-heart"/> : <i className="fa-regular fa-heart"></i>}</button>
                 </div>
             </div>
 

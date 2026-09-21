@@ -1,5 +1,6 @@
 import { useContext, useState } from "react"
 import { RecipeContext } from "../context/RecipeContext"
+import { Navigate } from "react-router-dom"
 
 
 export default function LoginPage(){
@@ -11,7 +12,7 @@ export default function LoginPage(){
     const [loginEmail, setLogEmail] = useState('')
     const [loginpassword, setLogPassword] = useState('')
 
-    const { createUser, logInUser} = useContext(RecipeContext)
+    const { createUser, logInUser, currentUser} = useContext(RecipeContext)
 
     function handleCreateUser(e){
         e.preventDefault()
@@ -37,6 +38,10 @@ export default function LoginPage(){
         }
 
         alert(result.message)
+    }
+
+    if(currentUser){
+        return <Navigate to={"/saved"} replace/>
     }
 
     return(

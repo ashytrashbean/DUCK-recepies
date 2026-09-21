@@ -183,8 +183,13 @@ export function RecipeProvider({children}){
         return{ok: true}
     }
 
+    async function fetchRecipe(id) {
+        const data = await getUrl(`lookup.php?i=${id}`)
+        return data.meals?.[0] ?? null
+    }
+
     return(
-        <RecipeContext.Provider value={{recipes, loadRecipes, recipe, getRecipe, category, area, ingredient, filterRecipes, users, currentUser, createUser,logInUser,logOutUser,toggleSaved}}>
+        <RecipeContext.Provider value={{recipes, loadRecipes, recipe, getRecipe, category, area, ingredient, filterRecipes, users, currentUser, createUser,logInUser,logOutUser,toggleSaved, fetchRecipe}}>
             {children}
         </RecipeContext.Provider>
     )
