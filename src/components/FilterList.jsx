@@ -1,10 +1,19 @@
 import { useContext, useState } from "react"
 import { RecipeContext } from "../context/RecipeContext"
+import LoadingState from "./states/LoadingState"
+import ErrorState from "./states/ErrorState"
 
 
 export default function FilterList(){
 
-    const {category, area, ingredient, filterRecipes} = useContext(RecipeContext)
+    const {
+        category,
+        area,
+        ingredient,
+        filterRecipes,
+        filtersLoading,
+        filtersError
+    } = useContext(RecipeContext)
     
     const [selectedCategory,setSelectedCategory] = useState("");
     const [selectedArea,setSelectedArea] = useState("");
@@ -52,8 +61,13 @@ export default function FilterList(){
         });
     }
 
+    if (filtersLoading && category.length === 0) {
+        return <LoadingState message="Loading filters..." />
+    }
+
     return(
         <>
+        {filtersError && <ErrorState message={filtersError} />}
         <select value={selectedCategory} onChange={handleCategoryChange}>
             <option value={""} >Category</option>
             {category.map((cat)=> <option key={cat.strCategory} value={cat.strCategory}>{cat.strCategory}</option>)}

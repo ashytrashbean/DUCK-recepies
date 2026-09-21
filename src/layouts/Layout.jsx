@@ -19,7 +19,7 @@ export default function Layout(){
                         <li><Link to={"/"}>Home</Link></li>
                         <li>{currentUser ? <Link to={"/saved"}>Saved</Link> : ""}</li>
                         <li>{currentUser ? (
-                            <a onClick={logOutUser}>Log Out</a>
+                            <button className="logout" type="button" onClick={logOutUser}>Log Out</button>
                             ) : (<Link to={"/login"}>Login</Link>)}</li>
                     </ul>
                 </nav>

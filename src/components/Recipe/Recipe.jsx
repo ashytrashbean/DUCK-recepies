@@ -5,7 +5,6 @@ import styles from "./Recipe.module.css"
 
 import LoadingState from "../states/LoadingState"
 import ErrorState from "../states/ErrorState"
-import EmptyState from "../states/EmptyState"
 import NotFoundState from "../states/NotFountState"
 
 export default function Recipe(){
@@ -41,7 +40,7 @@ export default function Recipe(){
     return(
         <section className={styles.recpt}>
             <div className={styles.side}>
-                <img src={recipe.strMealThumb} alt="" />
+                <img src={recipe.strMealThumb} alt={recipe.strMeal} />
 
                 <div>
                     <h1>{recipe.strMeal}</h1>      
@@ -49,7 +48,15 @@ export default function Recipe(){
                     <span>Country: {recipe.strCountry}</span>
                     <p>Source: <a className={styles.url} target="_blank" href={recipe.strSource}>{recipe.strSource}</a></p>
                     <p>{recipe.dateModified}</p>
-                    <button onClick={handleSave}>{isSaved ? <i className="fa-solid fa-heart"/> : <i className="fa-regular fa-heart"></i>}</button>
+                    <button
+                        type="button"
+                        onClick={handleSave}
+                        aria-label={isSaved ? "Remove recipe from saved" : "Save recipe"}
+                    >
+                        {isSaved
+                            ? <i className="fa-solid fa-heart" aria-hidden="true" />
+                            : <i className="fa-regular fa-heart" aria-hidden="true" />}
+                    </button>
                 </div>
             </div>
 

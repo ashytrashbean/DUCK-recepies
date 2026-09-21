@@ -24,14 +24,16 @@ nav ul{
     padding: 0;
 }
 
-header a{
+header a, .logout{
     text-decoration: none;
     color: black;
 }
 
-header a:hover{
+header a:hover , .logout:hover{
     text-decoration: underline;
     color: white;
+    background: none;
+    border: none;
 }
 
 footer, .icon{
@@ -97,4 +99,10 @@ form input{
     height: 25px;
     border-radius: 5px;
     margin: 5px;
+}
+
+.logout{
+    border: none;
+    margin: 0;
+    padding: 0;
 }

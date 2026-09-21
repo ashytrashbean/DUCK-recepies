@@ -17,7 +17,7 @@ function App() {
           <Route path='/recipe/:id' element={<Recipe/>}/>
           <Route path='/login' element={<LoginPage/>}/>
           <Route path='/saved' element={<SavedPage/>}/>
-          <Route path='*' element={<EmptyState/>}/>
+          <Route path='*' element={<EmptyState message="That page does not exist."/>}/>
         </Route>
       </Routes>
     </>
