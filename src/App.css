@@ -50,3 +50,16 @@ a{
     cursor: pointer;
 }
 
+.state{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 70vh;
+}
+.load{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 60vh;
+}

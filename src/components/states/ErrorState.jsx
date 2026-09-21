@@ -1,11 +1,12 @@
 import errorImage from "../../assets/DUCK_someing_wrong.svg"
 
-export default function LoadingState({message = "We could not load the recipes right now. Please try again later."}){
+export default function ErrorState({message = "We could not load the recipes right now. Please try again later."}){
 
     return(
-        <div>
-            <img src={errorImage} alt="a duck crying over a spilled cooking pot" />
+        <div className="load">
             <p>{message}</p>
+            <img src={errorImage} alt="a duck crying over a spilled cooking pot" />
+            <p>We are sorry</p>
         </div>
     )
 

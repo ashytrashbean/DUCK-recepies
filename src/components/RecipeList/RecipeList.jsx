@@ -34,7 +34,7 @@ export default function RecipeList(){
                     <img src={recipe.strMealThumb} alt="" />
                     <h3>{recipe.strMeal}</h3> 
                     <div>
-                        {/* <span>{recipe.strCategory}</span> */}
+                        <span>{recipe.strCategory}</span>
                         <span>{recipe.strCountry}</span>
                     </div>
                     <br />

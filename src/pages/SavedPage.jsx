@@ -65,8 +65,11 @@ export default function SavedPage(){
                         <section className= {styles.sect}>
                             <img src={saved.strMealThumb} alt={saved.strMeal} />
                             <h3>{saved.strMeal}</h3>
-                            <span>{saved.strCategory}</span>
-                            <span>{saved.strArea}</span>
+                            <div>
+                                <span>{saved.strCategory}</span>
+                                <span>{saved.strCountry}</span>
+                            </div>
+                            <br />
                         </section>
                     </Link>
                 ))}
