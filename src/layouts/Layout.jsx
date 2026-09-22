@@ -2,10 +2,16 @@ import { useContext } from "react";
 import { Outlet, Link } from "react-router-dom";
 import { RecipeContext } from "../context/RecipeContext";
 import logo from "../assets/g19.png"
+import { showToast } from "../utils/toast";
 
 
 export default function Layout(){
     const {currentUser, logOutUser} = useContext(RecipeContext)
+    function handleLogout(){
+        logOutUser()
+        showToast("Logged Out Successfully")
+    }
+    
     return(
         <>
             <header>
@@ -19,7 +25,7 @@ export default function Layout(){
                         <li><Link to={"/"}>Home</Link></li>
                         <li>{currentUser ? <Link to={"/saved"}>Saved</Link> : ""}</li>
                         <li>{currentUser ? (
-                            <button className="logout" type="button" onClick={logOutUser}>Log Out</button>
+                            <button className="logout" type="button" onClick={handleLogout}>Log Out</button>
                             ) : (<Link to={"/login"}>Login</Link>)}</li>
                     </ul>
                 </nav>

@@ -62,15 +62,15 @@ export default function SavedPage(){
         <div className={styles.recepies}>
             {savedRecipes.map((saved) => (
                 <Link key={saved.idMeal} to={`/recipe/${saved.idMeal}`} className={styles.recipeLink}>
-                        <section className= {styles.sect}>
-                            <img src={saved.strMealThumb} alt={saved.strMeal} />
-                            <h3>{saved.strMeal}</h3>
-                            <div>
-                                <span>{saved.strCategory}</span>
-                                <span>{saved.strCountry}</span>
-                            </div>
-                            <br />
-                        </section>
+                    <section className= {styles.sect}>
+                        <img src={saved.strMealThumb} alt={saved.strMeal} />
+                        <h3>{saved.strMeal}</h3>
+                        <div>
+                            <span>{saved.strCategory}</span>
+                            <span>{saved.strCountry}</span>
+                        </div>
+                        <br />
+                    </section>
                     </Link>
                 ))}
             </div>

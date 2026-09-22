@@ -1,4 +1,5 @@
 import { createContext, useEffect, useRef, useState } from "react";
+import { showToast } from "../utils/toast";
 
 export const RecipeContext = createContext();
 
@@ -106,6 +107,7 @@ export function RecipeProvider({children}){
         }
         catch(error){
             console.error(error);
+            showToast("Could not load the filters right now.", true)
         }
     }
 
@@ -202,23 +204,24 @@ export function RecipeProvider({children}){
     function logOutUser(){
         setCurrentUser(null)
         localStorage.removeItem('currentDuckUser')
+        return {ok: true, message: "Logged out seccessfully"}
     }
 
     function toggleSaved(recipeId){
-        if(!currentUser) return{ok: false, message:'you have to log in to be abale to save'}
+        if(!currentUser) return{ok: false, message:'You have to log in to be abale to save'}
 
         const storedUsers = JSON.parse(localStorage.getItem('duckUsers') ?? '[]')
+        const savedRecipes = currentUser.savedRecipes ?? []
+        const alreadySaved = savedRecipes.includes(recipeId)
 
         const updatedUsers = storedUsers.map(user => {
             if(user.id !== currentUser.id) return user
 
-            const alreadySaved = (user.savedRecipes ?? []).includes(recipeId)
-
             return{
                 ...user,
                 savedRecipes: alreadySaved
-                ? (user.savedRecipes ?? []).filter(id => id !== recipeId)
-                : [...(user.savedRecipes ?? []), recipeId]
+                ? savedRecipes.filter(id => id !== recipeId)
+                : [...savedRecipes, recipeId]
             }
         })
 
@@ -230,7 +233,10 @@ export function RecipeProvider({children}){
         setCurrentUser(updatedCurrentUser)
         localStorage.setItem('currentDuckUser', JSON.stringify(updatedCurrentUser))
 
-        return{ok: true}
+        return{
+            ok: true,
+            message : alreadySaved ? "Recipe removed from saved recipes" : "Recipe saved successfully"
+        }
     }
 
     async function fetchRecipe(id) {
@@ -239,7 +245,7 @@ export function RecipeProvider({children}){
     }
 
     return(
-        <RecipeContext.Provider value={{recipes, loadRecipes, refreshRecipes, recipesLoading, recipesError, recipe, getRecipe, recipeLoading, recipeError, category, area, ingredient, filterRecipes, users, currentUser, createUser,logInUser,logOutUser,toggleSaved, fetchRecipe}}>
+        <RecipeContext.Provider value={{recipes, loadRecipes, refreshRecipes, recipesLoading, recipesError, recipe, getRecipe, recipeLoading, recipeError, category, area, ingredient, filterRecipes, filtersLoading,filtersError, users, currentUser, createUser,logInUser,logOutUser,toggleSaved, fetchRecipe}}>
             {children}
         </RecipeContext.Provider>
     )

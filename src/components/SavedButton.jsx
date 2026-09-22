@@ -1,5 +1,6 @@
 import { useContext } from "react"
 import { RecipeContext } from "../context/RecipeContext"
+import {showToast} from "../utils/toast"
 
 
 export default function SavedButton({recipe}){
@@ -9,9 +10,10 @@ export default function SavedButton({recipe}){
     function handleSave() {
         const result = toggleSaved(recipe.idMeal)
 
-        if(!result.ok){
-            alert(result.message)
-        }
+        showToast( result.message, !result.ok)
+            if(!result.ok){
+                return
+            }
     }
 
     const isSaved = currentUser?.savedRecipes?.includes(recipe.idMeal)

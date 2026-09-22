@@ -1,4 +1,5 @@
 import { useContext, useState } from "react"
+import {showToast} from "../utils/toast"
 import { RecipeContext } from "../context/RecipeContext"
 
 
@@ -13,12 +14,12 @@ export default function Login(){
 
         const result = logInUser(loginEmail, loginpassword)
 
+        showToast( result.message, !result.ok)
+
         if(!result.ok){
-            alert(result.message)
             return
         }
 
-        alert(result.message)
     }
 
     return(

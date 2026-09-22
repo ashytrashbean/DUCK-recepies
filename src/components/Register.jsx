@@ -1,5 +1,6 @@
 import { useContext, useState } from "react"
 import { RecipeContext } from "../context/RecipeContext"
+import {showToast} from "../utils/toast"
 
 
 export default function Register(){
@@ -16,12 +17,10 @@ export default function Register(){
 
         const result = createUser(name, email, password)
 
-        if(!result.ok){
-            alert(result.message)
-            return
-        }
-        
-        alert(result.message)
+        showToast( result.message, !result.ok)
+            if(!result.ok){
+                return
+            }
     }
 
     return(
