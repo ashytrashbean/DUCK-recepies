@@ -1,11 +1,11 @@
 import { useContext } from "react"
-import { RecipeContext } from "../context/RecipeContext"
+import { AuthContext } from "../context/AuthContext"
 import {showToast} from "../utils/toast"
 
 
 export default function SavedButton({recipe}){
 
-    const {toggleSaved, currentUser} = useContext(RecipeContext)
+    const {toggleSaved, currentUser} = useContext(AuthContext)
 
     function handleSave() {
         const result = toggleSaved(recipe.idMeal)

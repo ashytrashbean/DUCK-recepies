@@ -149,100 +149,6 @@ export function RecipeProvider({children}){
         
     }
 
-    const [users, setUsers] = useState(()=>{
-        const storedUsers = JSON.parse(localStorage.getItem('duckUsers') ?? "[]")
-        return storedUsers
-    });
-
-    const [currentUser, setCurrentUser] = useState(()=>{
-        const storedUser = localStorage.getItem('currentDuckUser')
-        return storedUser ? JSON.parse(storedUser) : null
-    })
-
-    function createUser(displayName, email, password){
-        const storedUsers = JSON.parse(localStorage.getItem('duckUsers') ?? '[]');
-
-        const alreadyExists = storedUsers.some(user => user.email.toLowerCase() === email.toLowerCase())
-
-        if (alreadyExists) {
-            return {ok: false, message:'User already exists'}
-        }
-        
-        const newUser = {
-            id: Date.now(),
-            displayName,
-            email,
-            password,
-            savedRecipes: []
-        }
-        
-        const updatedUsers = [...storedUsers, newUser]
-        
-        setUsers(updatedUsers)
-        localStorage.setItem('duckUsers', JSON.stringify(updatedUsers))
-        
-        setCurrentUser(newUser)
-        localStorage.setItem('currentDuckUser', JSON.stringify(newUser))
-        
-        return {ok: true, message:'Account sucessfully created'}
-    }
-    
-    function logInUser(email, password){
-        const storedUsers = JSON.parse(localStorage.getItem('duckUsers') ?? '[]')
-        
-        const foundUser = storedUsers.find(
-            user =>
-                user.email.toLowerCase() === email.toLowerCase() &&
-            user.password === password
-        )
-        
-        if(!foundUser){
-            return {ok: false, message:'Wrong email or password'}
-        }
-        
-        setCurrentUser(foundUser)
-        localStorage.setItem('currentDuckUser', JSON.stringify(foundUser))
-        return {ok: true, message:'Logged in'}
-    }
-
-    function logOutUser(){
-        setCurrentUser(null)
-        localStorage.removeItem('currentDuckUser')
-        return {ok: true, message: "Logged out seccessfully"}
-    }
-
-    function toggleSaved(recipeId){
-        if(!currentUser) return{ok: false, message:'You have to log in to be abale to save'}
-
-        const storedUsers = JSON.parse(localStorage.getItem('duckUsers') ?? '[]')
-        const savedRecipes = currentUser.savedRecipes ?? []
-        const alreadySaved = savedRecipes.includes(recipeId)
-
-        const updatedUsers = storedUsers.map(user => {
-            if(user.id !== currentUser.id) return user
-
-            return{
-                ...user,
-                savedRecipes: alreadySaved
-                ? savedRecipes.filter(id => id !== recipeId)
-                : [...savedRecipes, recipeId]
-            }
-        })
-
-        setUsers(updatedUsers)
-        localStorage.setItem('duckUsers', JSON.stringify(updatedUsers))
-        
-        const updatedCurrentUser = updatedUsers.find(user => user.id === currentUser.id)
-        
-        setCurrentUser(updatedCurrentUser)
-        localStorage.setItem('currentDuckUser', JSON.stringify(updatedCurrentUser))
-
-        return{
-            ok: true,
-            message : alreadySaved ? "Recipe removed from saved recipes" : "Recipe saved successfully"
-        }
-    }
-
     async function fetchRecipe(id) {
         const data = await getUrl(`lookup.php?i=${id}`)
         return data.meals?.[0] ?? null
@@ -265,7 +171,7 @@ export function RecipeProvider({children}){
 
 
     return(
-        <RecipeContext.Provider value={{recipes, loadRecipes, refreshRecipes, activeFilter, recipesLoading, searchRecipes, recipesError, recipe, getRecipe, recipeLoading, recipeError, category, area, ingredient, filterRecipes, filtersLoading,filtersError, users, currentUser, createUser,logInUser,logOutUser,toggleSaved, fetchRecipe}}>
+        <RecipeContext.Provider value={{recipes, loadRecipes, refreshRecipes, activeFilter, recipesLoading, searchRecipes, recipesError, recipe, getRecipe, recipeLoading, recipeError, category, area, ingredient, filterRecipes, filtersLoading, filtersError, fetchRecipe}}>
             {children}
         </RecipeContext.Provider>
     )

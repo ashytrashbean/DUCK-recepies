@@ -1,5 +1,5 @@
 import { useContext, useState } from "react"
-import { RecipeContext } from "../context/RecipeContext"
+import { AuthContext } from "../context/AuthContext"
 import {showToast} from "../utils/toast"
 
 
@@ -10,7 +10,7 @@ export default function Register(){
     const [password, setPassword] = useState('')
 
 
-    const { createUser} = useContext(RecipeContext)
+    const { createUser} = useContext(AuthContext)
 
     function handleCreateUser(e){
         e.preventDefault()

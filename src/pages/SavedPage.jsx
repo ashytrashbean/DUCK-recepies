@@ -1,4 +1,5 @@
 import { useContext, useEffect, useState } from "react"
+import { AuthContext } from "../context/AuthContext"
 import { RecipeContext } from "../context/RecipeContext"
 import { Link } from "react-router-dom"
 import styles from "/src/components/RecipeList/recipeList.module.css"
@@ -9,7 +10,8 @@ import EmptyState from "../components/states/EmptyState"
 
 export default function SavedPage(){
 
-    const {currentUser, fetchRecipe} = useContext(RecipeContext)
+    const {currentUser} = useContext(AuthContext)
+    const {fetchRecipe} = useContext(RecipeContext)
     const [savedRecipes, setSavedRecipes] = useState([])
 
     const [savedLoading, setSavedLoading] = useState(false)

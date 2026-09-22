@@ -1,12 +1,12 @@
 import { useContext } from "react";
 import { Outlet, Link } from "react-router-dom";
-import { RecipeContext } from "../context/RecipeContext";
+import { AuthContext } from "../context/AuthContext";
 import logo from "../assets/g19.png"
 import { showToast } from "../utils/toast";
 
 
 export default function Layout(){
-    const {currentUser, logOutUser} = useContext(RecipeContext)
+    const {currentUser, logOutUser} = useContext(AuthContext)
     function handleLogout(){
         logOutUser()
         showToast("Logged Out Successfully")

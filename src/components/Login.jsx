@@ -1,13 +1,13 @@
 import { useContext, useState } from "react"
 import {showToast} from "../utils/toast"
-import { RecipeContext } from "../context/RecipeContext"
+import { AuthContext } from "../context/AuthContext"
 
 
 export default function Login(){
     const [loginEmail, setLogEmail] = useState('')
     const [loginpassword, setLogPassword] = useState('')
 
-    const { logInUser} = useContext(RecipeContext)
+    const { logInUser} = useContext(AuthContext)
 
     function handleLogin(e){
         e.preventDefault()
