@@ -1,10 +1,10 @@
 
 
-export default function FilterSelect({label, value, options, optionValue, optionLable, onChange}){
+export default function FilterSelect({label, value, options, optionValue, optionLabel, onChange}){
     return(
         <label> {label}: <select value={value} onChange={onChange}>
                 <option value={""}>Choose {label}</option>
-                {options.map((opt)=> <option key={opt[optionValue]} value={opt[optionValue]}>{opt[optionLable]}</option>)}
+                {options.map((opt)=> <option key={opt[optionValue]} value={opt[optionValue]}>{opt[optionLabel]}</option>)}
             </select>
         </label>
     )
