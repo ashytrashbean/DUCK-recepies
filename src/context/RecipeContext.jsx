@@ -65,7 +65,10 @@ export function RecipeProvider({children}){
         }
     } 
 
+    const [activeFilter, setActiveFilter] = useState(null)
+
     async function refreshRecipes(amount = 12) {
+        setActiveFilter(null)
         if (isRecipesLoading.current) return;
 
         setRecepies([])
@@ -116,6 +119,7 @@ export function RecipeProvider({children}){
     },[])
 
     async function filterRecipes({category, area, ingredient}) {
+        setActiveFilter({category, area, ingredient})
         if(isFiltering.current) return;
 
         let endpoint;
@@ -259,8 +263,9 @@ export function RecipeProvider({children}){
         }
     }
 
+
     return(
-        <RecipeContext.Provider value={{recipes, loadRecipes, refreshRecipes, recipesLoading, searchRecipes, recipesError, recipe, getRecipe, recipeLoading, recipeError, category, area, ingredient, filterRecipes, filtersLoading,filtersError, users, currentUser, createUser,logInUser,logOutUser,toggleSaved, fetchRecipe}}>
+        <RecipeContext.Provider value={{recipes, loadRecipes, refreshRecipes, activeFilter, recipesLoading, searchRecipes, recipesError, recipe, getRecipe, recipeLoading, recipeError, category, area, ingredient, filterRecipes, filtersLoading,filtersError, users, currentUser, createUser,logInUser,logOutUser,toggleSaved, fetchRecipe}}>
             {children}
         </RecipeContext.Provider>
     )

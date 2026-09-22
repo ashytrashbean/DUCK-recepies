@@ -10,7 +10,7 @@ import EmptyState from "../states/EmptyState"
 
 export default function RecipeList(){
 
-    const {recipes, loadRecipes, recipesLoading, recipesError} = useContext(RecipeContext)
+    const {recipes, loadRecipes, recipesLoading, recipesError, activeFilter} = useContext(RecipeContext)
 
     if (recipesLoading && recipes.length === 0) {
     return <LoadingState message="Finding delicious recipes..." />
@@ -34,8 +34,8 @@ export default function RecipeList(){
                     <img src={recipe.strMealThumb} alt="" />
                     <h3>{recipe.strMeal}</h3> 
                     <div>
-                        <span>{recipe.strCategory}</span>
-                        <span>{recipe.strCountry}</span>
+                        {recipe.strCategory && <span>{recipe.strCategory}</span>}
+                        {recipe.strCountry &&<span>{recipe.strCountry}</span>}
                     </div>
                     <br />
                 </section>
@@ -43,7 +43,7 @@ export default function RecipeList(){
         ))}
         </div>
 
-        <button onClick={()=> loadRecipes(5)}>Load More</button>
+        {!activeFilter && <button onClick={()=> loadRecipes(5)}>Load More</button>}
         {recipesError && recipes.length > 0 && (<ErrorState message="Could not load more recipes." />)}
         </div>
 )}
