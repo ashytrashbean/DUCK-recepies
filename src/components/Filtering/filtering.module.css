@@ -1,0 +1,42 @@
+
+.form{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    border: none;
+    padding: 5px;
+}
+
+.form button{
+    font-size: medium;
+    padding: 8px;
+    border-radius: 50%;
+}
+
+.filtering{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+select{
+    border-radius: 5px;
+    padding: 5px;
+}
+
+label{
+    margin: 5px;
+
+}
+
+.selcts{
+    padding: 5px;
+    /* border-right: 1px solid black; */
+}
+
+input[type="search" ]{
+    padding: 14px;
+}

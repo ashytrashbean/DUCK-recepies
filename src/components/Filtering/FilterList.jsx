@@ -4,6 +4,7 @@ import LoadingState from "../states/LoadingState"
 import ErrorState from "../states/ErrorState"
 import SearchBar from "./SearchBar"
 import FilterSelect from "./FilterSelect"
+import styles from "./filtering.module.css"
 
 
 export default function FilterList(){
@@ -85,17 +86,23 @@ export default function FilterList(){
     }
 
     return(
-        <>
-        <SearchBar onSearchSubmit={handleSearchSubmitted} onReset={handleReset}/>
-        {filtersError && <ErrorState message={filtersError} />}
-        <FilterSelect label="Category" value={selectedCategory} options={category}
-        optionValue="strCategory" optionLabel="strCategory" onChange={handleCategoryChange}/>
+        <div className={styles.filtering}>
 
-        <FilterSelect label="Country" value={selectedArea} options={area}
-        optionValue="strCountry" optionLabel="strCountry" onChange={handleAreaChange}/>
+            {filtersError && <ErrorState message={filtersError} />}
 
-        <FilterSelect label="Ingredient" value={selectedIngredient} options={ingredient}
-        optionValue="strIngredient" optionLabel="strIngredient" onChange={handleIngredientChange}/>
-        </>
+            <div className={styles.selcts}>
+                <FilterSelect label="Category" value={selectedCategory} options={category}
+                optionValue="strCategory" optionLabel="strCategory" onChange={handleCategoryChange}/>
+
+                <FilterSelect label="Country" value={selectedArea} options={area}
+                optionValue="strCountry" optionLabel="strCountry" onChange={handleAreaChange}/>
+
+                <FilterSelect label="Ingredient" value={selectedIngredient} options={ingredient}
+                optionValue="strIngredient" optionLabel="strIngredient" onChange={handleIngredientChange}/>
+            </div>
+
+            <SearchBar onSearchSubmit={handleSearchSubmitted} onReset={handleReset}/>
+            
+        </div>
     )
 }
