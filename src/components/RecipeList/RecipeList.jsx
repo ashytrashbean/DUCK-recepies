@@ -1,12 +1,12 @@
 import { useContext } from "react"
 import { RecipeContext } from "../../context/RecipeContext"
 import styles from './recipeList.module.css'
-import { Link } from "react-router-dom"
 
 import LoadingState from "../states/LoadingState"
 import ErrorState from "../states/ErrorState"
 import EmptyState from "../states/EmptyState"
 
+import RecipeCard from "./RecipeCard"
 
 export default function RecipeList(){
 
@@ -29,17 +29,7 @@ export default function RecipeList(){
 
         <div className={styles.recepies}>
             {recipes.map((recipe)=>(
-            <Link key={recipe.idMeal} to={`/recipe/${recipe.idMeal}`} className={styles.recipeLink}>
-                <section className= {styles.sect}>
-                    <img src={recipe.strMealThumb} alt="" />
-                    <h3>{recipe.strMeal}</h3> 
-                    <div>
-                        {recipe.strCategory && <span>{recipe.strCategory}</span>}
-                        {recipe.strCountry &&<span>{recipe.strCountry}</span>}
-                    </div>
-                    <br />
-                </section>
-            </Link>
+            <RecipeCard key={recipe.idMeal} recipe={recipe}/>
         ))}
         </div>
 

@@ -8,6 +8,8 @@ import LoadingState from "../components/states/LoadingState"
 import ErrorState from "../components/states/ErrorState"
 import EmptyState from "../components/states/EmptyState"
 
+import RecipeCard from "../components/RecipeList/RecipeCard"
+
 export default function SavedPage(){
 
     const {currentUser} = useContext(AuthContext)
@@ -59,24 +61,12 @@ export default function SavedPage(){
 
     return(
         <div className={styles.center}>
-        <h1>Hello {currentUser.displayName}, here are your saved recipes</h1>
-        
-        <div className={styles.recepies}>
-            {savedRecipes.map((saved) => (
-                <Link key={saved.idMeal} to={`/recipe/${saved.idMeal}`} className={styles.recipeLink}>
-                    <section className= {styles.sect}>
-                        <img src={saved.strMealThumb} alt={saved.strMeal} />
-                        <h3>{saved.strMeal}</h3>
-                        <div>
-                            <span>{saved.strCategory}</span>
-                            <span>{saved.strCountry}</span>
-                        </div>
-                        <br />
-                    </section>
-                    </Link>
-                ))}
+            <h1>Hello {currentUser.displayName}, here are your saved recipes</h1>
+            
+            <div className={styles.recepies}>
+                {savedRecipes.map((saved) => (
+                    <RecipeCard key={saved.idMeal} recipe={saved}/>))}
             </div>
-        
         </div>
     )
 }
