@@ -11,8 +11,8 @@ The project focuses on reusable React components, Context API state management, 
 If you would like to test out the website yourself, to the top right of this page you will the the link to it
 
 now if you'd like to clone the project to run it, you will have to:
-    -clone the project
-    -open the cloned project to VS or whater coding application you use
-    - open the terminal and run: 'npm install'
-    - after thats done you only need to run: 'npm run dev'
-    - if all goes right you should get a link in your terminal
+- clone the project
+- open the cloned project to VS or whater coding application you use
+- open the terminal and run: 'npm install'
+- after thats done you only need to run: 'npm run dev'
+- if all goes right you should get a link in your terminal
