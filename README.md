@@ -1,6 +1,6 @@
-# D.U.C.K Recipes
+# Deliciously Useful Cooking Knowledge
 
-D.U.C.K Recipes is a React-based recipe discovery app powered by TheMealDB API. Users can browse a feed of recipes, filter recipes by category, country, or ingredient, and open a detailed recipe view with ingredients, measurements, instructions, and source information.
+Deliciously Useful Cooking Knowledge (D.U.C.K for short) Recipes is a React-based recipe discovery app powered by [TheMealDB](https://www.themealdb.com) API. Users can browse a feed of recipes, filter recipes by category, country, or ingredient, and open a detailed recipe view with ingredients, measurements, instructions, and source information.
 
 Users can also create a local mock account, log in, and save their favorite recipes. Saved recipes are connected to the logged-in user and persisted in the browser with `localStorage`, allowing users to return to their saved recipes during later visits.
 
@@ -12,7 +12,7 @@ If you would like to test out the website yourself, here is the link to it:(http
 
 now if you'd like to clone the project to run it, you will have to:
 - clone the project
-- open the cloned project to VS or whater coding application you use
+- open the cloned project to VS or whatever coding application you use
 - open the terminal and run: 'npm install'
-- after thats done you only need to run: 'npm run dev'
+- after that's done you only need to run: 'npm run dev'
 - if all goes right you should get a link in your terminal
