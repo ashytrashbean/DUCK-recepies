@@ -8,7 +8,7 @@ The project focuses on reusable React components, Context API state management, 
 
 
 # Set-Up
-If you would like to test out the website yourself, here is the link to it:([duck-recepies.vercel.app](https://duck-recepies-git-main-ashytrashbeans-projects.vercel.app))
+If you would like to test out the website yourself, here is the link to it:[([duck-recepies.vercel.app](https://duck-recepies-git-main-ashytrashbeans-projects.vercel.app))](https://duck-recepies.vercel.app)
 
 now if you'd like to clone the project to run it, you will have to:
 - clone the project
