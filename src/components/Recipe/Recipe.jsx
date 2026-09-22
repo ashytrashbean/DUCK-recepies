@@ -2,6 +2,8 @@ import { useContext, useEffect } from "react"
 import { RecipeContext } from "../../context/RecipeContext"
 import { useParams } from "react-router-dom"
 import styles from "./Recipe.module.css"
+import IngredientList from "./IngredientList"
+import SavedButton from "../SavedButton"
 
 import LoadingState from "../states/LoadingState"
 import ErrorState from "../states/ErrorState"
@@ -9,7 +11,7 @@ import NotFoundState from "../states/NotFountState"
 
 export default function Recipe(){
     const {id} = useParams();
-    const {recipe, getRecipe, recipeLoading, recipeError, toggleSaved, currentUser} = useContext(RecipeContext)
+    const {recipe, getRecipe, recipeLoading, recipeError} = useContext(RecipeContext)
 
     
     useEffect(()=>{
@@ -27,15 +29,6 @@ export default function Recipe(){
     if(!recipe) {
         return <NotFoundState message="Recipe not found."/> }
 
-    function handleSave() {
-        const result = toggleSaved(recipe.idMeal)
-
-        if(!result.ok){
-            alert(result.message)
-        }
-    }
-
-    const isSaved = currentUser?.savedRecipes?.includes(recipe.idMeal)
 
     return(
         <section className={styles.recpt}>
@@ -48,35 +41,14 @@ export default function Recipe(){
                     <span>Country: {recipe.strCountry}</span>
                     <p>Source: <a className={styles.url} target="_blank" href={recipe.strSource}>{recipe.strSource}</a></p>
                     <p>{recipe.dateModified}</p>
-                    <button
-                        type="button"
-                        onClick={handleSave}
-                        aria-label={isSaved ? "Remove recipe from saved" : "Save recipe"}
-                    >
-                        {isSaved
-                            ? <i className="fa-solid fa-heart" aria-hidden="true" />
-                            : <i className="fa-regular fa-heart" aria-hidden="true" />}
-                    </button>
+                    <SavedButton recipe={recipe}/>
                 </div>
             </div>
 
             <br /><br /> <hr />
 
             <div className={styles.howto}>
-                <ul>
-                    {Array.from({ length: 20 }, (_, index)=>{
-                        const ingredient = recipe[`strIngredient${index + 1}`]?.trim()
-                        const measure = recipe[`strMeasure${index + 1}`]?.trim()
-
-                        if(!ingredient) return null
-
-                        return(
-                            <li key={index}>
-                                <strong>{measure}</strong> {ingredient}
-                            </li>
-                        )
-                    })}
-                </ul>
+                <IngredientList recipe={recipe} />
 
                 <div>
                     <p className={styles.instructions}>{recipe.strInstructions}</p>
