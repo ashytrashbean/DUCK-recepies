@@ -39,8 +39,8 @@ export default function Recipe(){
                     <h1>{recipe.strMeal}</h1>      
                     <span>Category: {recipe.strCategory}</span>
                     <span>Country: {recipe.strCountry}</span>
-                    <p>Source: <a className={styles.url} target="_blank" href={recipe.strSource}>{recipe.strSource}</a></p>
-                    <p>{recipe.dateModified}</p>
+                    {recipe.strSource && <p>Source: <a className={styles.url} target="_blank" href={recipe.strSource}>{recipe.strSource}</a></p>}
+                    {recipe.dateModified && <p>{recipe.dateModified}</p>}
                     <SavedButton recipe={recipe}/>
                 </div>
             </div>
