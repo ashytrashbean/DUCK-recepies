@@ -1,13 +1,16 @@
 import { useContext, useEffect } from "react"
-import { RecipeContext } from "../context/RecipeContext"
-import FilterList from "../components/FilterList"
+import FilterList from "../components/Filtering/FilterList"
 import RecipeList from "../components/RecipeList/RecipeList"
+import { RecipeContext } from "../context/RecipeContext"
 
 export default function HomePage(){
-    const { refreshRecipes } = useContext(RecipeContext)
 
-    useEffect(() => {
-        refreshRecipes()
+    const {recipes, loadRecipes} = useContext(RecipeContext)
+
+    useEffect(()=>{
+        if(recipes.length === 0){
+            loadRecipes(12)
+        }
     }, [])
 
     return(

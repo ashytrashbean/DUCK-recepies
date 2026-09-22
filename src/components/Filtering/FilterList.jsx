@@ -1,7 +1,9 @@
 import { useContext, useState } from "react"
-import { RecipeContext } from "../context/RecipeContext"
-import LoadingState from "./states/LoadingState"
-import ErrorState from "./states/ErrorState"
+import { RecipeContext } from "../../context/RecipeContext"
+import LoadingState from "../states/LoadingState"
+import ErrorState from "../states/ErrorState"
+import SearchBar from "./SearchBar"
+import FilterSelect from "./FilterSelect"
 
 
 export default function FilterList(){
@@ -12,12 +14,14 @@ export default function FilterList(){
         ingredient,
         filterRecipes,
         filtersLoading,
-        filtersError
+        filtersError,
+        refreshRecipes
     } = useContext(RecipeContext)
     
     const [selectedCategory,setSelectedCategory] = useState("");
     const [selectedArea,setSelectedArea] = useState("");
     const [selectedIngredient,setSelectedIngredient] = useState("");
+
 
     function handleCategoryChange(event) {
         const value = event.target.value;
@@ -61,27 +65,37 @@ export default function FilterList(){
         });
     }
 
+    function clearDropdowns(){
+    setSelectedCategory("")
+    setSelectedArea("")
+    setSelectedIngredient("")
+    }
+
+    function handleSearchSubmitted(){
+        clearDropdowns()
+    }
+
+    function handleReset(){
+        clearDropdowns()
+        refreshRecipes()
+    }
+
     if (filtersLoading && category.length === 0) {
         return <LoadingState message="Loading filters..." />
     }
 
     return(
         <>
+        <SearchBar onSearchSubmit={handleSearchSubmitted} onReset={handleReset}/>
         {filtersError && <ErrorState message={filtersError} />}
-        <select value={selectedCategory} onChange={handleCategoryChange}>
-            <option value={""} >Category</option>
-            {category.map((cat)=> <option key={cat.strCategory} value={cat.strCategory}>{cat.strCategory}</option>)}
-        </select>
+        <FilterSelect label="Category" value={selectedCategory} options={category}
+        optionValue="strCategory" optionLabel="strCategory" onChange={handleCategoryChange}/>
 
-        <select value={selectedArea} onChange={handleAreaChange}>
-            <option value={""} >Coutry</option>
-            {area.map((ar)=> <option key={ar.strCountry} value={ar.strCountry}>{ar.strCountry}</option>)}
-        </select>
+        <FilterSelect label="Country" value={selectedArea} options={area}
+        optionValue="strCountry" optionLabel="strCountry" onChange={handleAreaChange}/>
 
-        <select value={selectedIngredient} onChange={handleIngredientChange}>
-            <option value={""} >Ingredient</option>
-            {ingredient.map((ing)=> <option key={ing.idIngredient} value={ing.strIngredient}>{ing.strIngredient}</option>)}
-        </select>
+        <FilterSelect label="Ingredient" value={selectedIngredient} options={ingredient}
+        optionValue="strIngredient" optionLabel="strIngredient" onChange={handleIngredientChange}/>
         </>
     )
 }

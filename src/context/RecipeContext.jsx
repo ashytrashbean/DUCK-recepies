@@ -243,9 +243,24 @@ export function RecipeProvider({children}){
         const data = await getUrl(`lookup.php?i=${id}`)
         return data.meals?.[0] ?? null
     }
+    async function searchRecipes(searchTerm) {
+        if (!searchTerm.trim()) return
+
+        setFiltersLoading(true)
+        setFiltersError(null)
+
+        try{
+            const data = await getUrl(`search.php?s=${encodeURIComponent(searchTerm.trim())}`)
+            setRecepies(data.meals ?? [])
+        }catch{
+            setFiltersError("Could not search recipes right now.")
+        }finally{
+            setFiltersLoading(false)
+        }
+    }
 
     return(
-        <RecipeContext.Provider value={{recipes, loadRecipes, refreshRecipes, recipesLoading, recipesError, recipe, getRecipe, recipeLoading, recipeError, category, area, ingredient, filterRecipes, filtersLoading,filtersError, users, currentUser, createUser,logInUser,logOutUser,toggleSaved, fetchRecipe}}>
+        <RecipeContext.Provider value={{recipes, loadRecipes, refreshRecipes, recipesLoading, searchRecipes, recipesError, recipe, getRecipe, recipeLoading, recipeError, category, area, ingredient, filterRecipes, filtersLoading,filtersError, users, currentUser, createUser,logInUser,logOutUser,toggleSaved, fetchRecipe}}>
             {children}
         </RecipeContext.Provider>
     )
