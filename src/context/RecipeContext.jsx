@@ -96,11 +96,10 @@ export function RecipeProvider({children}){
     async function filtering() {
 
         try{
-            const [catData, arData, ingData] = await Promise.all([
-                getUrl("list.php?c=list"),
-                getUrl("list.php?a=list"),
-                getUrl("list.php?i=list")
-            ])
+            const catData = await getUrl("list.php?c=list");
+            const arData = await getUrl("list.php?a=list");
+            const ingData = await getUrl("list.php?i=list");
+
             setCategory(catData.meals);
             setArea(arData.meals);
             setIngredient(ingData.meals);

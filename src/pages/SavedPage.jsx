@@ -57,7 +57,7 @@ export default function SavedPage(){
 
     return(
         <div className={styles.center}>
-        <h1>Your saved recipes</h1>
+        <h1>Hello {currentUser.displayName}, here are your saved recipes</h1>
         
         <div className={styles.recepies}>
             {savedRecipes.map((saved) => (
