@@ -1,7 +1,6 @@
 import { useContext, useEffect, useState } from "react"
 import { AuthContext } from "../context/AuthContext"
 import { RecipeContext } from "../context/RecipeContext"
-import { Link } from "react-router-dom"
 import styles from "/src/components/RecipeList/recipeList.module.css"
 
 import LoadingState from "../components/states/LoadingState"

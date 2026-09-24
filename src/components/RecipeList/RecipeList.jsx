@@ -10,7 +10,15 @@ import RecipeCard from "./RecipeCard"
 
 export default function RecipeList(){
 
-    const {recipes, loadRecipes, recipesLoading, recipesError, activeFilter} = useContext(RecipeContext)
+    const {
+        recipes,
+        loadRecipes,
+        recipesLoading,
+        recipesError,
+        activeFilter,
+        filtersLoading,
+        filtersError
+    } = useContext(RecipeContext)
 
     if (recipesLoading && recipes.length === 0) {
     return <LoadingState message="Finding delicious recipes..." />
@@ -18,6 +26,10 @@ export default function RecipeList(){
 
     if (recipesError && recipes.length === 0) {
         return <ErrorState message={recipesError} />
+    }
+
+    if (filtersLoading) {
+        return <LoadingState message="Finding matching recipes..." />
     }
 
     if (recipes.length === 0) {
@@ -35,5 +47,6 @@ export default function RecipeList(){
 
         {!activeFilter && <button onClick={()=> loadRecipes(5)}>Load More</button>}
         {recipesError && recipes.length > 0 && (<ErrorState message="Could not load more recipes." />)}
+        {filtersError && recipes.length > 0 && (<ErrorState message={filtersError} />)}
         </div>
 )}

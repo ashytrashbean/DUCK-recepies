@@ -108,8 +108,8 @@ export function RecipeProvider({children}){
             setArea(arData.meals);
             setIngredient(ingData.meals);
         }
-        catch(error){
-            console.error(error);
+        catch{
+            setFiltersError("Could not load the filters right now.")
             showToast("Could not load the filters right now.", true)
         }
     }
@@ -154,17 +154,22 @@ export function RecipeProvider({children}){
         return data.meals?.[0] ?? null
     }
     async function searchRecipes(searchTerm) {
-        if (!searchTerm.trim()) return
+        const trimmedSearchTerm = searchTerm.trim()
 
+        if (!trimmedSearchTerm || isFiltering.current) return
+
+        isFiltering.current = true
         setFiltersLoading(true)
         setFiltersError(null)
+        setActiveFilter(trimmedSearchTerm)
 
         try{
-            const data = await getUrl(`search.php?s=${encodeURIComponent(searchTerm.trim())}`)
+            const data = await getUrl(`search.php?s=${encodeURIComponent(trimmedSearchTerm)}`)
             setRecepies(data.meals ?? [])
         }catch{
             setFiltersError("Could not search recipes right now.")
         }finally{
+            isFiltering.current = false
             setFiltersLoading(false)
         }
     }
