@@ -7,6 +7,7 @@ import RecipePage from './pages/RecipePage'
 import LoginPage from './pages/LoginPage'
 import SavedPage from './pages/SavedPage'
 import EmptyState from './components/states/EmptyState'
+import { Analytics } from '@vercel/analytics/react'
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
           <Route path='*' element={<EmptyState message="That page does not exist."/>}/>
         </Route>
       </Routes>
+      <Analytics />
     </>
   )
 }
